@@ -41,7 +41,7 @@ blockquote {
 
 input,
 button,
-select,
+select,fv
 textarea {
 	outline: none;
 }
@@ -21054,7 +21054,7 @@ html .rd-file-picker input[type="file"] {
 }
 
 .rd-navbar-default.rd-navbar-fixed .rd-navbar-toggle span:before, .rd-navbar-transparent.rd-navbar-fixed .rd-navbar-toggle span:before, .rd-navbar-center.rd-navbar-fixed .rd-navbar-toggle span:before, .rd-navbar-minimal.rd-navbar-fixed .rd-navbar-toggle span:before, .rd-navbar-humburger-menu.rd-navbar-fixed .rd-navbar-toggle span:before {
-	content: "";
+	content: "\f0c9";
 	transform: rotate(0deg) scale(1);
 	opacity: 1;
 	visibility: visible;
@@ -21137,7 +21137,7 @@ html .rd-file-picker input[type="file"] {
 }
 
 .rd-navbar-default.rd-navbar-fixed .rd-navbar-top-panel-toggle span:before, .rd-navbar-transparent.rd-navbar-fixed .rd-navbar-top-panel-toggle span:before, .rd-navbar-center.rd-navbar-fixed .rd-navbar-top-panel-toggle span:before, .rd-navbar-minimal.rd-navbar-fixed .rd-navbar-top-panel-toggle span:before, .rd-navbar-humburger-menu.rd-navbar-fixed .rd-navbar-top-panel-toggle span:before {
-	content: "";
+	content: "\f142";
 	transform: rotate(0deg) scale(1);
 	opacity: 1;
 	visibility: visible;
