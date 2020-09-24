@@ -177,3 +177,132 @@
           </nav>
         </div>
       </header>
+
+        <!-- login form-->
+      <section class="section section-lg bg-default">
+        <div class="container">
+          <div class="row justify-content-sm-center">
+            <div class="col-md-8 col-xl-4">
+              <h2 class="font-weight-bold">Identificación</h2>
+              <hr class="divider bg-madison">
+              <div class="offset-md-top-56 offset-top-40">
+                <form class="rd-mailform text-left" id="login-form">
+                  <div class="form-wrap">
+                    <label class="form-label form-label-outside" for="login-username">Nombre de usuario</label>
+                    <input class="form-input form-validation-inside" id="login-username" type="text" name="name" data-constraints="@Required">
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label form-label-outside" for="login-pass">Contraseña</label>
+                    <input class="form-input form-validation-inside" id="login-pass" type="password" name="password" data-constraints="@Required">
+                  </div>
+                  <div class="offset-top-20 text-center text-xl-left">
+                    <button class="btn button-primary d-sm-inline-block text-middle" type="submit">Iniciar</button>
+                    
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+      <!-- Page Footer-->
+      <!-- Corporate footer-->
+      <footer class="page-footer" id="contactoReference">
+        <div class="hr bg-gray-light"></div>
+        <div class="container section-xs block-after-divider">
+          <div class="row row-20 justify-content-xl-between justify-content-sm-center">
+            <div class="col-lg-6 col-xl-4">
+              <!--Footer brand--><a class="d-inline-block" href="index.html"><img width='100' height='101' src='images/logo-170x172.png' alt=''/>
+                <div>
+                  <h6 class="barnd-name font-weight-bold offset-top-25">Jorge Chavez Dartnell</h6>
+                </div>
+                <div>
+                  <p class="brand-slogan text-gray font-italic font-accent">La Florida</p>
+                </div></a>
+            </div>
+            <div class="col-sm-10 col-lg-6 col-xl-5 text-xl-left">
+              <h6 class="font-weight-bold">Contacto</h6>
+              <div class="text-subline"></div>
+              <div class="offset-top-30">
+                <ul class="list-unstyled contact-info list">
+                  <li>
+                    <div class="unit flex-row align-items-center unit-spacing-xs">
+                      <div class="unit-left"><span class="icon mdi mdi-phone text-middle icon-xs text-madison"></span></div>
+                      <div class="unit-body"><a class="text-dark" href="tel:#">+51 982272568</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="offset-top-15">
+                    <div class="unit flex-row align-items-center unit-spacing-xs">
+                      <div class="unit-left"><span class="icon mdi mdi-map-marker text-middle icon-xs text-madison"></span></div>
+                      <div class="unit-body text-left"><a class="text-dark" href="#">Alameda Los Laureles S/N - La Forida, Distrito de Nuevo Imperial <br class="d-none d-xl-inline"> Cañete, Perú</a></div>
+                    </div>
+                  </li>
+                  <li class="offset-top-15">
+                    <div class="unit flex-row align-items-center unit-spacing-xs">
+                      <div class="unit-left"><span class="icon mdi mdi-email-open text-middle icon-xs text-madison"></span></div>
+                      <div class="unit-body"><a href="mailto:#">pilarbor70@gmail.com</a></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="offset-top-15 text-left">
+                <ul class="list-inline list-inline-xs list-inline-madison">
+                  <li><a class="icon icon-xxs fab fa-facebook icon-circle icon-gray-light-filled" href="#"></a></li>
+                  <li><a class="icon icon-xxs fab fa-twitter icon-circle icon-gray-light-filled" href="#"></a></li>
+                  <li><a class="icon icon-xxs fab fa-google icon-circle icon-gray-light-filled" href="#"></a></li>
+                  <li><a class="icon icon-xxs fab fa-instagram icon-circle icon-gray-light-filled" href="#"></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-madison context-dark">
+          <div class="container text-lg-left section-5">
+            <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>.&nbsp;</span><span>All Rights Reserved</span><span>.&nbsp;</span><a href="privacy-policy.html">Privacy Policy</a></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Java script-->
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+
+          <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyC7WtKX9eniDIJ56QP47B07E2DLE1e11Y8",
+        authDomain: "fir-project-4a532.firebaseapp.com",
+        databaseURL: "https://fir-project-4a532.firebaseio.com",
+        projectId: "fir-project-4a532",
+        storageBucket: "fir-project-4a532.appspot.com",
+        messagingSenderId: "868916431663",
+        appId: "1:868916431663:web:3c8d07f299728aed9dafda",
+        measurementId: "G-CSD0VKJN3H"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      
+    </script>
+    <!--My Code-->
+    <script src="js/main.js"></script>
+	
+</body>
+</html>
