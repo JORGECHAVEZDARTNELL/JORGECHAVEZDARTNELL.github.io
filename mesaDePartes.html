@@ -162,7 +162,7 @@
                         </div>
                       <span class="rd-navbar-submenu-toggle"></span></li>
                       <li class=""><a href="./events.html">Eventos</a>
-                      <li class=""><a href="./news.html">Noticias</a>
+                      
                       <li><a href="./mesaDePartes.html">Mesa de Partes</a>
                       </li>
                       <li><a href="#contactoReference">Contacto</a>
@@ -188,7 +188,7 @@
 
             <!-- Page Content-->
             <section class="section text-left section-sm bg-default">
-                <form action="" method="post">
+                <form id="tramite-form">
                   <div class="container">
                     <div class="row justify-content-sm-center">
                       <div class="col-sm-10 col-lg-8">
@@ -258,13 +258,18 @@
                           </div>
                           <div class="col-xl-8 col-lg-6">
                             <div class="form-wrap">
-                              <input class="btn button-primary" id="mesa-doc" type="file" name="doc" data-constraints="@Required">
+                              <input class="btn button-primary" id="mesa-anexo" type="file" name="doc" data-constraints="@Required">
                             </div>
                           </div>
                         </div>
                         <div class="row row-30 offset-top-30">
-                          <div class="col-xl-6">
-                            <button type="submit" class="btn button-primary">ENVIAR</button>
+                          <div class="col-xl-8 ">
+                            <div class="progress">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            </div>
+                          <div class="col-xl-4">
+                            <button id="btn-tramite-form" type="submit" class="btn button-primary">ENVIAR</button>
                             </div>
                           </div>
                         </div>
@@ -337,6 +342,34 @@
     <!-- Java script-->
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
+
+          <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyC7WtKX9eniDIJ56QP47B07E2DLE1e11Y8",
+        authDomain: "fir-project-4a532.firebaseapp.com",
+        databaseURL: "https://fir-project-4a532.firebaseio.com",
+        projectId: "fir-project-4a532",
+        storageBucket: "fir-project-4a532.appspot.com",
+        messagingSenderId: "868916431663",
+        appId: "1:868916431663:web:3c8d07f299728aed9dafda",
+        measurementId: "G-CSD0VKJN3H"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      
+    </script>
+    <!--My Code-->
+    <script src="js/main.js"></script>
 	
 </body>
 </html>

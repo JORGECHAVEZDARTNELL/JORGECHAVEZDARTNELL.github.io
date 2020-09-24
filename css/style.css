@@ -21,6 +21,12 @@
  */
 /** @group Base */
 /** @section Reset Styles*/
+@font-face {
+	font-family: 'FontAwesome';
+	src: url("all.min.css");
+	font-weight: normal;
+	font-style: normal;
+}
 a:focus,
 button:focus {
 	outline: none !important;

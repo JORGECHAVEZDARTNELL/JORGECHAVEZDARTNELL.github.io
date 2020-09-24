@@ -70,9 +70,6 @@ window.addEventListener('DOMContentLoaded', async(e) =>{
 })
 
 
-
-
-
 taskForm.addEventListener('submit', async(e)=>{
     e.preventDefault();
     const title = taskForm['task-title'];
