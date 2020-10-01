@@ -5,10 +5,16 @@ const db = firebase.firestore();
 //login
 const loginForm = document.getElementById('login-form');
 var main = document.getElementById("main");
-var user=null;
+//var user=null;
+var notas = {
+    cursos: null,
+    aula: null,
+};
 
 
 const getUser = (username, password) => db.collection("users").where("username","==",username).where("password","==",password).get();
+//const getNotas = (criterios)=> db.collection(criterios).doc("matematica").get();
+const getNotas = (criterios)=> db.collection(criterios).get();
 
 //const getLogin = (username, password) =>db.collection("users").where("username","==",username).where("password","==",password).get();
 
@@ -20,9 +26,13 @@ loginForm.addEventListener('submit', async(e)=>{
     const password = loginForm["login-pass"];
     const querySnapshot = await getUser(username.value, password.value);
     querySnapshot.forEach(doc => {
-        var user = doc;
+        //var user = doc;
         localStorage.setItem("usuario", doc);
-        testPlantilla(doc.data());
+        
+        testPlantilla(doc);
+        
+
+
     }
     )
 
@@ -30,33 +40,64 @@ loginForm.addEventListener('submit', async(e)=>{
     //console.log(user);
 })
 
-function testPlantilla(doc){
-    console.log(doc);
+async function testPlantilla(doc){
+    var user=doc.data();
+    var scriptConsulta = `users/${doc.id}/aulas`;
+    const aulas = await db.collection(scriptConsulta).get();
+    var h2 ="";
+    var strCursos="";
+    aulas.forEach(aula=>{
+        if(user.tipo="Alumno" || user.nivel=="n1"){
+            h2=user.nivel.concat(aula.id);
+            var cursos = aula.data().cursos;
+            cursos.forEach(curso=>{
+                strCursos+=`
+                    <div class="col">
+                        <article class="post-news post-news-wide">
+                            <div class="post-news-body">
+                                <h6>${curso}</h6>
+                                <div class="offset-top-20 offset-bottom-20">
+                                <button class="btn button-primary btn-icon btn-icon-left" data-id="${aula.id}" href="">
+                                ver más
+                                </button></div>         
+                            </div>
+                        </article>
+                    </div>`
+            });
+        }else{
+            h2="cursos";
+            var cursos = aula.data().cursos;
+            cursos.forEach(curso=>{
+            strCursos+=`
+                    <div class="col">
+                        <article class="post-news post-news-wide">
+                            <div class="post-news-body">
+                                <h6>${curso - aula.id.substr(2,1)}</h6>
+                                <div class="offset-top-20 offset-bottom-20">
+                                <button class="btn button-primary btn-icon btn-icon-left" data-id="${aula.id}" href="">
+                                -->
+                                </button></div>         
+                            </div>
+                        </article>
+                    </div>`;
+            });
+        }
+        console.log(aula.data());
+        
+
+    });
+
+
     var strHtml =`
     
     <div class="row">
-    <div class="col-12 col-lg-3">
-    <a class="btn button-primary btn-icon btn-icon-left" style="float:right" href=""><span>--</span></a>
-        <h2>--</h2>
+    <div class="col-12 col-lg-3 section-sm-bottom-30">
+    <a class="btn button-primary btn-icon btn-icon-left" style="float:right" href=""><span>X</span></a>
+        <h2>${h2}</h2>
         <div class="row row-30 text-md-left justify-content-sm-center">
-            <div class="col">
-                <article class="post-news post-news-wide">
-                    <div class="post-news-body">
-                        <h6>--</h6>
-                        <div class="offset-top-20 offset-bottom-20"><a class="btn button-primary btn-icon btn-icon-left" href="shopping-cart.html"><span>--</span></a></div>         
-                    </div>
-                </article>
-            </div>
-            <div class="col">
-                <article class="post-news post-news-wide">
-                    <div class="post-news-body">
-                        <h6>--</h6>
-                        <div class="offset-top-20 offset-bottom-20"><a class="btn button-primary btn-icon btn-icon-left" href="shopping-cart.html"><span>--</span></a></div>         
-                    </div>
-                </article>
-            </div>
-        </div>
-        </div>
+        ${strCursos}
+    </div>
+    </div>
     <div class="col-12 col-lg-9">
         <div class="table-responsive clearfix">
         <table class="table-dark-blue table-custom table table-custom-wrap">
