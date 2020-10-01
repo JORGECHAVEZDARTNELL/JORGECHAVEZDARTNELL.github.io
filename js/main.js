@@ -1,51 +1,103 @@
 const db = firebase.firestore();
 
+
+
 //login
 const loginForm = document.getElementById('login-form');
 var main = document.getElementById("main");
+var user=null;
+
+
+const getUser = (username, password) => db.collection("users").where("username","==",username).where("password","==",password).get();
 
 //const getLogin = (username, password) =>db.collection("users").where("username","==",username).where("password","==",password).get();
-const getAula = db.collection("users").where("username","==",username.value).where("password","==",password.value).get();
+
 
 
 loginForm.addEventListener('submit', async(e)=>{
     e.preventDefault();
     const username = loginForm["login-username"];
     const password = loginForm["login-pass"];
-    await db.collection("users").where("username","==",username.value).where("password","==",password.value).get()
-    .then(function(querySnapshot){
-        if(querySnapshot.size==1){
-            querySnapshot.forEach(function(doc){
-                loadNotas(doc);
-                loadAula();
-                
-            })
-        }
-    }).catch(function(error){
-        console.log("error");
-    });
+    const querySnapshot = await getUser(username.value, password.value);
+    querySnapshot.forEach(doc => {
+        var user = doc;
+        localStorage.setItem("usuario", doc);
+        testPlantilla(doc.data());
+    }
+    )
 
     //const user=doc.data();
     //console.log(user);
 })
 
-async function loadContent(){
-    await db.collection("aulas").where("nivel","==", "1").where("grado","==","1")
-    .where("seccion","==","1").get()
-    .then(function(querySnapshot){
-        if(querySnapshot.size>=1){
-            querySnapshot.forEach(function(doc){
-                
-            })
-        }
-    }).catch(function(error){
-        console.log("error:2");
-    })
+function testPlantilla(doc){
+    console.log(doc);
+    var strHtml =`
+    
+    <div class="row">
+    <div class="col-12 col-lg-3">
+    <a class="btn button-primary btn-icon btn-icon-left" style="float:right" href=""><span>--</span></a>
+        <h2>--</h2>
+        <div class="row row-30 text-md-left justify-content-sm-center">
+            <div class="col">
+                <article class="post-news post-news-wide">
+                    <div class="post-news-body">
+                        <h6>--</h6>
+                        <div class="offset-top-20 offset-bottom-20"><a class="btn button-primary btn-icon btn-icon-left" href="shopping-cart.html"><span>--</span></a></div>         
+                    </div>
+                </article>
+            </div>
+            <div class="col">
+                <article class="post-news post-news-wide">
+                    <div class="post-news-body">
+                        <h6>--</h6>
+                        <div class="offset-top-20 offset-bottom-20"><a class="btn button-primary btn-icon btn-icon-left" href="shopping-cart.html"><span>--</span></a></div>         
+                    </div>
+                </article>
+            </div>
+        </div>
+        </div>
+    <div class="col-12 col-lg-9">
+        <div class="table-responsive clearfix">
+        <table class="table-dark-blue table-custom table table-custom-wrap">
+        <tbody>
+          <tr>
+            <th>--</th>
+            <th colspan="3">--</th>
+            <th colspan="3">--</th>
+            <th colspan="3">--</th>
+            <th colspan="3">--</th>
+
+          </tr>
+          <tr>
+            <td><a class="text-primary" href="">-- --</a></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            <td><input class="" type="number" data-zeros="true" value="1" min="1" max="20"></td>
+            
+            
+          </tr>
+      </tbody>
+      </table>
+        </div>
+    </div>
+  </div>`;
+
+    main.innerHTML=strHtml;
+   
 }
-
-
-
-
+main.addEventListener(onchange, async(e)=>{
+    await console.log("pupu");
+});
 
 
 function loadNotas(doc){
@@ -53,21 +105,10 @@ function loadNotas(doc){
     aulas= user.aulaseccion;
     aulas.forEach(function(element){
         console.log(element.split("-"));
+        testPlantilla();
     });
     main.innerHTML='';
-    main.innerHTML+=`  <section class="section section-xl bg-default">
-    <div class="container">
-        <div class="row">
-        <div class="col-lg-6">
-
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-lg-6">
-            
-        </div>
-        </div>
-    </section>`;
+    
 }
 
 
