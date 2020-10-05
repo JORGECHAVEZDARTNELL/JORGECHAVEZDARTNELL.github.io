@@ -91,3 +91,45 @@ taskForm.addEventListener('submit', async(e)=>{
     title.focus();
     
 })
+
+
+
+
+
+/* const querySnapshotAulas = await db.collection(scriptConsulta).get();
+    querySnapshotAulas.forEach(async aula=>{
+        let aulaData = {};
+        aulaData.id=userData.info.nivel+aula.id;
+        var orden=await db.collection("salones").doc(aulaData.id).get();
+        useerorden=orden.data();
+        aula.data().cursos.forEach(async curso=>{
+
+            cursoData.nombre=curso;
+            cursoData.profesor=await db.collection("salones/"+aulaData.id+"/cursos/").doc(curso).get();
+            cursoData.profesor=cursoData.profesor.data();
+            const querySnapshotCriterios = await db.collection("salones/"+aulaData.id+"/cursos/"+curso+"/criterios").get();
+            cursoData.criterios=[]
+            querySnapshotCriterios.forEach(async criterio=>{
+                let criterioData={};
+                criterioData.id=criterio.id;
+                criterioData.nombre=criterio.data().nombre
+                criterioData.instrumentos=[];
+                const querySnapshotInstrumentos = await db.collection("salones/"+aulaData.id+"/cursos/"+curso+"/criterios/"+criterio.id+"/instrumentos").get();
+                querySnapshotInstrumentos.forEach(instrumento=>{
+
+                    let instrumentoData= {};
+                    instrumentoData.id=instrumento.id
+                    instrumentoData.nombre=instrumento.data().nombre;
+                    instrumentoData.notas=instrumento.data().notas;
+                    criterioData.instrumentos.push(instrumentoData);
+                });
+                cursoData.criterios.push(criterioData);
+            }
+            );
+        }
+        );
+        aulaData.cursos=cursos;
+
+        //agregamos el aula
+        userData.aulas[userData.info.nivel+aula.id];
+    }); */

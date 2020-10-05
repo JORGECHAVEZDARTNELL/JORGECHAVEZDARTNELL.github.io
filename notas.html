@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html class="wide wow-animation scrollTo desktop landscape rd-navbar-static-linked" lang="es">
+<html class="" lang="es">
 
   <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Site Title-->
@@ -12,12 +12,12 @@
     <meta name="keywords" content="Pagina institucional del colegio estatal jorge chavez dartnell, centro poblado la florida, nuevo imperial, cañete, perú">
     <link rel="icon" href="images/logo-170x172.ico" type="image/x-icon">
     <!-- Stylesheets-->
-    <link rel="stylesheet" type="text/css" href="css/css.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all">
     
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
     <!--fontawesome-->
-    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css" media="all">
     
 
     
@@ -272,7 +272,46 @@
           </div>
         </div>
       </footer>
+      
+      <!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+      <section class="section section-lg bg-catskill">    
+        <div class="container-fluid" id="myModel" >
+          <div class="row justify-content-sm-center">
+            <div class="col-md-12 col-xl-12">
+              <h2 class="font-weight-bold">Identificación</h2>
+              <hr class="divider bg-madison">
+              <div class="offset-md-top-56 offset-top-40">
+                <form class="rd-mailform text-left" id="login-form">
+                  <div class="form-wrap">
+                    <label class="form-label form-label-outside" for="login-username">Nombre de usuario</label>
+                    <input class="form-input form-validation-inside" id="login-username" type="text" name="name" data-constraints="@Required">
+                  </div>
+                  <div class="form-wrap">
+                    <label class="form-label form-label-outside" for="login-pass">Contraseña</label>
+                    <input class="form-input form-validation-inside" id="login-pass" type="password" name="password" data-constraints="@Required">
+                  </div>
+                  <div class="offset-top-20 text-center text-xl-left">
+                    <button class="btn button-primary d-sm-inline-block text-middle" type="submit">Iniciar</button>
+                    
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+  </div>
+</div>
+    </div>-->
     <!-- Java script-->
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
@@ -304,6 +343,12 @@
     </script>
     <!--My Code-->
     <script src="js/main.js"></script>
+
+    <script>
+      $('#exampleModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+      })
+    </script>
 	
 </body>
 </html>
