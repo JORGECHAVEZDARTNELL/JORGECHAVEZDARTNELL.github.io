@@ -58,9 +58,9 @@ async function cargaPagina(user){
         const dataCriterios = await db.collection("curso/"+curso+"/criterios").get();
         let indice = cursos.indexOf(curso)
         userData.info.cursos[indice]={id: curso, info: dataCurso.data()};
-
+        let criterios =new Array();
         await dataCriterios.forEach(async criterio=>{
-            let criterios =[]          
+            
             
             let instrumentos=criterio.data().instrumentos;
             await instrumentos.forEach(async instrumento=>{
@@ -70,11 +70,11 @@ async function cargaPagina(user){
                     instrumentos[instrumento]={ notas:nota.data().nota};
                 })
             });
-            criterios.push({criterio: criterio.data().criterio,instrumentos});
-
-            userData.info.cursos[indice].criterios=criterios;
-            console.log(userData);
-        })
+            criterios.push({id: criterio.id, criterio: criterio.data().criterio,instrumentos});
+            
+        });
+        userData.info.cursos[indice].criterios=criterios;           
+        console.log(userData);
         if(userData.info.tipo=="Alumno"){
             cursosContainer.innerHTML+=`
             <div class="col">
@@ -225,35 +225,65 @@ async function cargaPagina(user){
                     </tr>
                     <tr>
                       <td class="text-secondary" style="text-align:center">Instrumento</th>
-                      <td class="text-secondary" style="text-align:center"><input class="instrumento" type="text" data-id="0" value="" data-constraints="@Required"></th>
+                      <td class="text-secondary " style="text-align:center"><input id="instrumento-0" type="text" data-id="0" value="" data-constraints="@Required"></th>
                     </tr>
                     <tr>
                       <td class="text-secondary" style="text-align:center">Instrumento</th>
-                      <td class="text-secondary" style="text-align:center"><input class="instrumento" type="text" data-id="1" value="" data-constraints="@Required"></th>
+                      <td class="text-secondary" style="text-align:center"><input id="instrumento-1" type="text" data-id="1" value="" data-constraints="@Required"></th>
+                    </tr>
+                    <tr>
+                      <td class="text-secondary" style="text-align:center">Instrumento</th>
+                      <td class="text-secondary" style="text-align:center"><input id="instrumento-2" type="text" data-id="2" value="" data-constraints="@Required"></th>
+                    </tr>
+                    <tr>
+                      <td class="text-secondary" style="text-align:center">Instrumento</th>
+                      <td class="text-secondary" style="text-align:center"><input id="instrumento-3" type="text" data-id="3" value="" data-constraints="@Required"></th>
                     </tr>`;
                 btnAgregarCriterio.addEventListener('click', (e)=>{
                     let nInstrumentos=2;
                     divSecondary.innerHTML=`${strTableEdit}
                     </tbody>
                     </table>`;
-                    divSecondary.innerHTML+=`<button class="btn button-secondary btn-icon offset-top-20 btn-icon-left" id="agregarInstrumento" style:"margin-left:10px" href="">Agregar Instrumento</button>`;
+                    
                     divSecondary.innerHTML+=`<button class="btn button-secondary btn-icon offset-top-20 btn-icon-left" id="guardar" style:"margin-left:10px"data-id="${indice}" href="">Guardar</button>`;
 
-                    const agregarInstrumento=document.getElementById("agregarInstrumento");
-                    agregarInstrumento.addEventListener('click', (e)=>{
-                        nInstrumentos++;
-                        divSecondary.innerHTML=strTableEdit+`<tr>
-                        <td class="text-secondary" style="text-align:center">Instrumento</th>
-                        <td class="text-secondary" style="text-align:center"><input class="instrumento" type="text" data-id="${nInstrumentos-1}" value="" data-constraints="@Required"></th>
-                      </tr>`
-                      divSecondary.innerHTML+=`</tbody>
-                      </table>`;
-                      divSecondary.innerHTML+=`<button class="btn button-secondary btn-icon offset-top-20 btn-icon-left" id="agregarInstrumento" style:"margin-left:10px" href="">Agregar Instrumento</button>`;
-                    divSecondary.innerHTML+=`<button class="btn button-secondary btn-icon offset-top-20 btn-icon-left" id="guardar" style:"margin-left:10px"data-id="${indice}" href="">Guardar</button>`;
 
-                    })
+                    const btnGuardar=document.getElementById('guardar');
 
+                    btnGuardar.addEventListener('click',async (e)=>{
+                        const criterioName = document.getElementById('criterio');
+                        let instrumentos=new Array();
+                        //console.log(userData.info.cursos[indice].id,userData.info.cursos[indice].criterios[e.target.dataset.id].id);
+                        for(var i = 0; i<=3; i++){
+                            const instrumentoName = document.getElementById('instrumento-'+i);
+                            if(instrumentoName.value!=""){
+                                instrumentos.push(instrumentoName.value);
+                            }
+                            
+                        }
+                        let curso=userData.info.cursos[indice];
+                        let notasIniciales=new Array();
 
+                        for(i in curso.info.alumno){
+                            notasIniciales.push(0);
+                        }
+                        
+                        await db.collection('curso/'+userData.info.cursos[indice].id+'/criterios').doc().set({
+                            criterio: criterioName.value,
+                            instrumentos: instrumentos
+                        });
+                        instrumentos.forEach(async (instrumento)=>{
+                            await db.collection('curso/'+userData.info.cursos[indice].id+'/notas').doc().set({
+                                criterio:criterioName.value,
+                                instrumento: instrumento,
+                                nota: notasIniciales
+                            })    
+                        })
+                        cargaPagina(user);
+                        
+                        //console.log(instrumentos);
+                        
+                    });
                 });
                 btnEdit.forEach(btn=>{
                     btn.addEventListener('click', (e)=>{
@@ -264,9 +294,10 @@ async function cargaPagina(user){
 
                 })
             });
-
+            
             btnVerMas.forEach(btn=>{
                 btn.addEventListener('click', (e)=>{
+                    divSecondary.innerHTML="";
                     let cursoId = e.target.dataset.id;
                     let cursosList=userData.info.cursos;
                     let strCriterios=``;
